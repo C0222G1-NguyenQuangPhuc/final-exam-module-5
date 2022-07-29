@@ -1,0 +1,122 @@
+{
+  "list-bus": [
+    {
+      "id": 1,
+      "name": "Phương Trang"
+    },
+    {
+      "id": 2,
+      "name": "Trung Nguyên"
+    },
+    {
+      "id": 3,
+      "name": "Trung Tín"
+    }
+  ],
+  "list-ticket": [
+    {
+      "id": 1,
+      "price": 100000,
+      "destination": "Đà Nẵng",
+      "arrive": "Huế",
+      "dayStart": "2021-09-06",
+      "timeStart": "20:00",
+      "bus": {
+        "id": 1,
+        "name": "Phương Trang"
+      },
+      "quantity": 4
+    },
+    {
+      "id": 2,
+      "price": 5000000,
+      "destination": "Đà Nẵng",
+      "arrive": "Hải Phòng",
+      "dayStart": "2021-10-09",
+      "timeStart": "07:40",
+      "bus": {
+        "id": 2,
+        "name": "Trung Nguyên"
+      },
+      "quantity": 0
+    },
+    {
+      "id": 3,
+      "price": 4500000,
+      "destination": "Đà Nẵng",
+      "arrive": "Hà Nội",
+      "dayStart": "2021-09-10",
+      "timeStart": "07:40",
+      "bus": {
+        "id": 3,
+        "name": "Trung Tín"
+      },
+      "quantity": 12
+    },
+    {
+      "destination": "asefasef",
+      "arrive": "asefasef",
+      "bus": {
+        "id": 2,
+        "name": "Trung Nguyên"
+      },
+      "dayStart": "2022-07-15",
+      "timeStart": "18:59",
+      "quantity": 0,
+      "price": 10000000,
+      "id": 4
+    },
+    {
+      "destination": "Gia Lai",
+      "arrive": "Kon Tum",
+      "bus": {
+        "id": 3,
+        "name": "Trung Tín"
+      },
+      "dayStart": "2022-07-22",
+      "timeStart": "17:44",
+      "quantity": 4,
+      "price": 1000000,
+      "id": 5
+    },
+    {
+      "destination": "Quảng Nam",
+      "arrive": "Bình Phước",
+      "bus": {
+        "id": 1,
+        "name": "Phương Trang"
+      },
+      "dayStart": "2022-07-06",
+      "timeStart": "19:58",
+      "quantity": 10,
+      "price": 5000000,
+      "id": 6
+    },
+    {
+      "destination": "Phuc",
+      "arrive": "QUang",
+      "bus": {
+        "id": 2,
+        "name": "Trung Nguyên"
+      },
+      "dayStart": "2022-07-13",
+      "timeStart": "18:19",
+      "quantity": 123,
+      "price": 100000,
+      "id": 7
+    },
+    {
+      "destination": "11",
+      "arrive": "11",
+      "bus": {
+        "id": 1,
+        "name": "Phương Trang"
+      },
+      "dayStart": "2022-07-13",
+      "timeStart": "11:11",
+      "quantity": 1,
+      "price": 1,
+      "id": 8
+    }
+  ]
+}

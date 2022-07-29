@@ -1,0 +1,73 @@
+<div class="content bg-light">
+  <div class="container">
+    <h2 class="text-center">Danh sách vé xe</h2>
+    <div class="container-fluid d-flex">
+      <div class="col-1">
+        <h5>Điểm đi:</h5>
+      </div>
+      <div class="col-2">
+        <input class="input-group" type="text" (keydown.enter)="searchByDestination($event.target.value)">
+      </div>
+      <div class="col-2">
+        <h5>Điểm đến:</h5>
+      </div>
+      <div class="col-2">
+        <input class="input-group" type="text" (keydown.enter)="searchByArrive($event.target.value)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="align-content-center">
+        <!-- Button Add new modal -->
+        <button type="button" class="btn btn-primary" routerLink="/ticket/create">
+          Thêm mới
+        </button>
+      </div>
+    </div>
+    <table class="w-100">
+      <tr>
+        <th>Điểm đi</th>
+        <th>Điểm đến</th>
+        <th>Giá vé</th>
+        <th>Ngày khởi hành</th>
+        <th>Giờ khởi hành</th>
+        <th>Nhà xe</th>
+        <th>Số lượng</th>
+        <th>Chức năng</th>
+      </tr>
+      <tr *ngFor="let ticket of ticketList | paginate : { itemsPerPage: 2, currentPage: p }">
+        <td>{{ticket.destination}}</td>
+        <td>{{ticket.arrive}}</td>
+        <td>{{ticket.price}}</td>
+        <td>{{ticket.dayStart}}</td>
+        <td>{{ticket.timeStart}}</td>
+        <td>{{ticket.bus.busName}}</td>
+        <td>{{ticket.quantity}}</td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="getInfo(ticket)" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            Đặt vé
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div style="justify-content: space-around;display: flex;">
+  <pagination-controls (pageChange)="p = $event" class=" page-item"></pagination-controls>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Xác nhận thông tin khách hàng</h5>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc chắn muốn đặt vé từ <span style="font-weight: bold; color: #ff4146">{{destination}}</span> đến <span style="font-weight: bold; color: #ff4146">{{arrive}}</span> vào <span style="font-weight: bold; color: #ff4146">{{timeStart}}</span> ngày <span style="font-weight: bold; color: #ff4146">{{dayStart}}</span> không?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-primary" (click)="edit()" data-bs-dismiss="modal" >Đặt vé</button>
+      </div>
+    </div>
+  </div>
+</div>

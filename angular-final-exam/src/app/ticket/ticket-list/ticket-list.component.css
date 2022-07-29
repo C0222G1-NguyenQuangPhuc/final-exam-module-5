@@ -1,0 +1,8 @@
+th,td{
+  height: 55px;
+}
+
+tr:hover{
+  background-color: #e0dede;
+}
+

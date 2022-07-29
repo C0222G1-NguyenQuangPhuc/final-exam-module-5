@@ -1,0 +1,51 @@
+<div class="container">
+  <form [formGroup]="formAddNew">
+    <h4 class="text-center"></h4>
+    <label>Điểm đi</label>
+    <input type="text" class="form-control" placeholder="Nhập điểm đi" formControlName="destination">
+    <p style="color: red; font-size: 0.9rem" *ngIf="formAddNew.get('destination').touched
+                && formAddNew.hasError('required', 'destination')">Vui lòng nhập điểm đi</p>
+    <label>Điểm đến</label>
+    <input type="text" class="form-control" placeholder="Nhập điểm đến" formControlName="arrive">
+    <p style="color: red; font-size: 0.9rem" *ngIf="formAddNew.get('arrive').touched
+                && formAddNew.hasError('required', 'arrive')">Vui lòng nhập điểm đến</p>
+    <div class="form-group" formGroupName="bus">
+      <label class="form-label">Nhà xe</label>
+      <select class="form-select" formControlName="busId">
+        <option value="">--Chọn nhà xe--</option>
+        <option [value]="bus.busId" *ngFor="let bus of busList">{{bus.busName}}</option>
+      </select>
+      <p style="color: red; font-size: 0.9rem" *ngIf="formAddNew.get('bus').touched
+                && formAddNew.hasError('required', 'bus')">Vui lòng chọn nhà xe</p>
+    </div>
+    <label>Ngày khởi hành</label>
+    <input type="date" class="form-control" placeholder="Nhập ngày khởi hành" formControlName="dayStart">
+    <p style="color: red; font-size: 0.9rem" *ngIf="formAddNew.get('dayStart').touched
+                && formAddNew.hasError('required', 'dayStart')">Vui lòng chọn ngày khởi hành</p>
+    <label>Giờ khởi hành</label>
+    <input type="time" class="form-control" placeholder="Nhập giờ khởi hành" formControlName="timeStart">
+    <p style="color: red; font-size: 0.9rem" *ngIf="formAddNew.get('timeStart').touched
+                && formAddNew.hasError('required', 'timeStart')">Vui lòng chọn giờ khởi hành</p>
+    <label>Số lượng</label>
+    <input type="number" class="form-control" placeholder="Nhập số lượng" formControlName="quantity">
+    <p style="color: red; font-size: 0.9rem" *ngIf="formAddNew.get('quantity').touched
+                && formAddNew.hasError('required', 'quantity')">Vui lòng nhập số lượng vé</p>
+    <p style="color: red; font-size: 0.9rem" *ngIf="formAddNew.get('quantity').touched
+                && formAddNew.hasError('min', 'quantity')">Số lượng vé phải là số dương</p>
+    <label>Giá vé</label>
+    <input type="number" class="form-control" placeholder="Nhập số lượng" formControlName="price">
+    <p style="color: red; font-size: 0.9rem" *ngIf="formAddNew.get('price').touched
+                && formAddNew.hasError('required', 'price')">Vui lòng nhập giá vé</p>
+    <p style="color: red; font-size: 0.9rem" *ngIf="formAddNew.get('price').touched
+                && formAddNew.hasError('min', 'price')">Giá vé phải là số dương</p>
+    <div class="d-flex">
+      <div class="col-6">
+        <a class="btn btn-dark w-100 mt-5" routerLink="/ticket">Quay lại</a>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-primary w-100 mt-5" (click)="create()" [disabled]="formAddNew.invalid" >Tạo mới</button>
+      </div>
+    </div>
+
+  </form>
+</div>
