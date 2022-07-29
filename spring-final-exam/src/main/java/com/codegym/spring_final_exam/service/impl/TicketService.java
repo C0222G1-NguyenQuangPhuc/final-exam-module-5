@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class TicketService implements ITicketService {
 
@@ -27,5 +29,15 @@ public class TicketService implements ITicketService {
     @Override
     public Page<Ticket> searchByDestination(Pageable pageable, String des, String arrive) {
         return iTicketRepository.searchByDestination(pageable, "%" + des + "%", "%" + arrive + "%");
+    }
+
+    @Override
+    public Ticket findById(Integer id) {
+        return iTicketRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(Ticket ticket) {
+        iTicketRepository.delete(ticket);
     }
 }

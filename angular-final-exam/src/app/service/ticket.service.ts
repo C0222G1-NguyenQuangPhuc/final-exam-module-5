@@ -28,18 +28,22 @@ export class TicketService {
   }
 
   findById(id: number): Observable<Ticket> {
-    console.log('check api');
-    console.log(this.http.get<Ticket>(`${API_URL}/list-ticket/${id}`).subscribe(data => {
-      console.log(data);
-    }));
-    return this.http.get<Ticket>(`${API_URL}/list-ticket/${id}`);
+    return this.http.get<Ticket>(`${API_URL}/ticket/${id}`);
+  }
+
+  order(ticket: Ticket): Observable<Ticket> {
+    return this.http.put<Ticket>(`${API_URL}/ticket/order`, ticket);
   }
 
   edit(ticket: Ticket): Observable<Ticket> {
-    return this.http.put<Ticket>(`${API_URL}/ticket/order`, ticket);
+    return this.http.patch<Ticket>(`${API_URL}/ticket/edit`, ticket);
   }
 
   searchByDestination(des: string, arrive: string) {
     return this.http.get<Ticket[]>(`${API_URL}/search/${des}&${arrive}`);
+  }
+
+  delete(id: number): Observable<Ticket> {
+    return this.http.delete<Ticket>(`${API_URL}/ticket/delete/${id}`);
   }
 }

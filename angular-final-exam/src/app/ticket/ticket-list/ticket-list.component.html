@@ -6,13 +6,16 @@
         <h5>Điểm đi:</h5>
       </div>
       <div class="col-2">
-        <input class="input-group" type="text" (keydown.enter)="searchByDestination($event.target.value)">
+        <input class="input-group" type="text" [(ngModel)]="dKey">
       </div>
       <div class="col-2">
         <h5>Điểm đến:</h5>
       </div>
       <div class="col-2">
-        <input class="input-group" type="text" (keydown.enter)="searchByArrive($event.target.value)">
+        <input class="input-group" type="text" [(ngModel)]="aKey">
+      </div>
+      <div class="col-2">
+        <button class="btn btn-dark" type="button" (click)="search()">Search</button>
       </div>
     </div>
     <div class="row">
@@ -43,8 +46,14 @@
         <td>{{ticket.bus.busName}}</td>
         <td>{{ticket.quantity}}</td>
         <td>
-          <button type="button" class="btn btn-danger" (click)="getInfo(ticket)" data-bs-toggle="modal" data-bs-target="#deleteModal">
+          <button type="button" class="btn btn-warning" (click)="getInfo(ticket)" data-bs-toggle="modal"
+                  data-bs-target="#orderModal">
             Đặt vé
+          </button>
+          <a routerLink="/ticket/{{ticket.ticketId}}" class="btn btn-dark">Sửa</a>
+          <button type="button" class="btn btn-danger" (click)="getInfo(ticket)" data-bs-toggle="modal"
+                  data-bs-target="#deleteModal">
+            Xóa
           </button>
         </td>
       </tr>
@@ -55,19 +64,46 @@
   <pagination-controls (pageChange)="p = $event" class=" page-item"></pagination-controls>
 </div>
 
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--Start Order Modal-->
+<div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel2">Xác nhận thông tin khách hàng</h5>
+        <h5 class="modal-title" id="exampleModalLabel2">Xác nhận thông tin vé</h5>
       </div>
       <div class="modal-body">
-        Bạn có chắc chắn muốn đặt vé từ <span style="font-weight: bold; color: #ff4146">{{destination}}</span> đến <span style="font-weight: bold; color: #ff4146">{{arrive}}</span> vào <span style="font-weight: bold; color: #ff4146">{{timeStart}}</span> ngày <span style="font-weight: bold; color: #ff4146">{{dayStart}}</span> không?
+        Bạn có chắc chắn muốn đặt vé từ <span style="font-weight: bold; color: #ff4146">{{destination}}</span> đến <span
+        style="font-weight: bold; color: #ff4146">{{arrive}}</span> vào <span
+        style="font-weight: bold; color: #ff4146">{{timeStart}}</span> ngày <span
+        style="font-weight: bold; color: #ff4146">{{dayStart}}</span> không?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-        <button type="button" class="btn btn-primary" (click)="edit()" data-bs-dismiss="modal" >Đặt vé</button>
+        <button type="button" class="btn btn-primary" (click)="order()" data-bs-dismiss="modal">Đặt vé</button>
       </div>
     </div>
   </div>
 </div>
+<!--End Order Modal-->
+
+<!--Start Delete Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1">Xác nhận thông tin vé</h5>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc chắn muốn xóa vé từ <span style="font-weight: bold; color: #ff4146">{{destination}}</span> đến <span
+        style="font-weight: bold; color: #ff4146">{{arrive}}</span> vào <span
+        style="font-weight: bold; color: #ff4146">{{timeStart}}</span> ngày <span
+        style="font-weight: bold; color: #ff4146">{{dayStart}}</span> không?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-primary" (click)="delete()" data-bs-dismiss="modal">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Delete Modal-->

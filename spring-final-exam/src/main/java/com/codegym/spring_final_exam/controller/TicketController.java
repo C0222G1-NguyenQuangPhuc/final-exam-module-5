@@ -38,6 +38,12 @@ public class TicketController {
         return new ResponseEntity<>(busList, HttpStatus.OK);
     }
 
+    @GetMapping("/ticket/{id}")
+    public ResponseEntity<?> findTicket(@PathVariable("id") Integer id) {
+        Ticket ticket = iTicketService.findById(id);
+        return new ResponseEntity<>(ticket, HttpStatus.OK);
+    }
+
     @PostMapping("/ticket/create")
     public ResponseEntity<?> createTicket(@Valid @RequestBody Ticket ticket) {
         iTicketService.save(ticket);
@@ -50,6 +56,12 @@ public class TicketController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PatchMapping("/ticket/edit")
+    public ResponseEntity<?> editTicket(@RequestBody Ticket ticket ){
+        iTicketService.save(ticket);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @GetMapping("/search/{des}&{arrive}")
     public ResponseEntity<?> searchByDestination(@RequestParam(name = "page", defaultValue = "0") int page,
                                                  @PathVariable("des") String des,
@@ -57,5 +69,12 @@ public class TicketController {
         Sort sort = Sort.by("ticket_id").ascending();
         Page<Ticket> tickets = iTicketService.searchByDestination(PageRequest.of(page, 100, sort), des, arrive);
         return new ResponseEntity<>(tickets, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/ticket/delete/{id}")
+    public ResponseEntity<?> deleteTicket(@PathVariable("id") Integer id){
+        Ticket ticket = iTicketService.findById(id);
+        iTicketService.delete(ticket);
+        return new ResponseEntity<>(ticket, HttpStatus.OK);
     }
 }

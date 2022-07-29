@@ -16,6 +16,8 @@ export class TicketListComponent implements OnInit {
   arrive: string;
   timeStart: string;
   dayStart: string;
+  dKey: string;
+  aKey: string;
 
   constructor(private ticketService: TicketService,
               private toastr: ToastrService) {
@@ -40,14 +42,15 @@ export class TicketListComponent implements OnInit {
     this.dayStart = ticket.dayStart;
   }
 
-  edit() {
+
+  order() {
     if (this.ticket.quantity < 1) {
       this.toastr.warning('Đã bán hết vé');
     } else {
       this.ticket.quantity = this.ticket.quantity - 1;
-      this.ticketService.edit(this.ticket).subscribe(res => {
-        this.toastr.success('Đặt vé thành công');
+      this.ticketService.order(this.ticket).subscribe(res => {
         this.getTicketList();
+        this.toastr.success('Đặt vé thành công');
       }, error => {
         console.log(error);
         this.toastr.error('Đặt vé không thành công');
@@ -55,9 +58,23 @@ export class TicketListComponent implements OnInit {
     }
   }
 
-  searchByDestination(des: string, arrive: string) {
-    this.ticketService.searchByDestination(des, arrive).subscribe(list => {
-      this.ticketList = list;
+  delete() {
+    this.ticketService.delete(this.ticket.ticketId).subscribe(res => {
+      this.getTicketList();
+      this.toastr.success('Xóa vé thành công');
+    }, error => {
+      this.toastr.error('Xóa vé không thành công');
+    });
+  }
+
+  search() {
+    this.ticketService.searchByDestination(this.dKey, this.aKey).subscribe((list: any) => {
+      if (list != null) {
+        this.ticketList = list.content;
+      } else {
+        this.toastr.warning('Không tìm thấy vé');
+      }
+      console.log(list);
     });
   }
 }
